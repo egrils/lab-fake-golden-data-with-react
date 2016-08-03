@@ -6,6 +6,7 @@
     <script src="./build/react.js"></script>
     <script src="./build/react-dom.js"></script>
     <script src="./build/browser.js"></script>
+    <script src="https://npmcdn.com/react-router/umd/ReactRouter.min.js"></script>
     <style>
         .panel{
             margin: 20px auto;
@@ -59,7 +60,11 @@
 </head>
 <body>
 
-<div id="app">
+<div id="app" target="edit">
+    <script type="text/javascript">
+        document.write(this.window.name="edit");
+    </script>
+
     <script type="text/babel" src="app.js"></script>
 </div>
 

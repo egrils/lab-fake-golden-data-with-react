@@ -33,59 +33,76 @@ const Item = React.createClass({
 });
 
 const App = React.createClass({
+
     getInitialState(){
         return {count: [], clicked: true}
     },
-    handelClickedText(e){
-        this.state.count.push('text');
-        this.setState({count: this.state.count})
+    checktext(){
+
+        document.getElementById("text").checked=true
     },
-    handelClickedDate(e){
-        this.state.count.push('date');
-        this.setState({count: this.state.count})
+    unchecktext(){
+        document.getElementById("text").checked=false
+    },
+    addChange(e){
+        if(document.getElementById("text").checked===true) {
+            this.state.count.push('text');
+            this.setState({count: this.state.count})
+        }else {
+            this.state.count.push('date');
+            this.setState({count: this.state.count})
+        }
+
     },
     deleted(index){
         this.state.count.splice(index, 1);
         this.setState({count: this.state.count})
     },
     onchange(){
-        this.setState({clicked: !this.state.clicked})
+        this.setState({clicked: !this.state.clicked});
     },
 
 
     render(){
-        if (this.state.clicked === true) {
             return <div className="all">
                 <div className="look"></div>
                 <div float="left">
+                 <a href="./show.html" target="_blank">
                 <input type="button" id="look" onClick={this.onchange}  value="预览"/>
+                 </a>
                 </div>
                 <br /><br />
                 <div className="Edit">
-                    <ul type="circle">
-                        <li type="text" id="text" onClick={this.handelClickedText.bind(this)} value="文本框">文本框</li>
 
-                        <br /><br />
-                        <li type="text" id="Date" onClick={this.handelClickedDate.bind(this)} value="日期">日期</li>
-                    </ul>
+                    <form selectedValue={this.state.selectedValue}>
+                        <input type="radio" name="item" id="text" value="text" onClick={this.checktext}/>文本框
+                        <br />
+                        <input type="radio" name="item" id="date" value="date" onClick={this.unchecktext}/>日期
+
+                        <br />
+                        <input type="button" id="add" onClick={this.addChange} value="add"/>
+                    </form>
+
                 </div>
-                <div className="design">
+                <div className="design" value="design">
                     <div className="dleft"></div>
                     <Edit count={this.state.count} deleted={this.deleted.bind(this)} clicked={this.state.clicked}/>
                 </div>
             </div>
-        } else {
-            return <div>
-                <input type="button" id="edit" onClick={this.onchange} value="编辑"/><br/>
-                <div className="preview">
-                </div><br />
 
-                <input type="button" id="submit" value="提交"/>
-            </div>
-        }
-    }
+    }/*,
+    render2(){
+        return <div className="all">
+                <Edit count={this.state.count} deleted={this.deleted.bind(this)} clicked={this.state.clicked}/>
+        </div>
+
+    }*/
 });
 
 ReactDOM.render(
     <App/>
     , document.getElementById('app'));
+/*
+ReactDOM.render2(
+    <App/>
+    , document.getElementById('preview'));*/

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>show</title>
+    <style>
+        .preview{
+
+            min-height: 1000px;
+            width: 100%;
+            border: 1px solid #eee;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+        function open_win()
+        {
+            window.open("edit.html","edit",false)
+        }
+    </script>
+</head>
+<body>
+
+<div><!--
+    <a href="edit.html" target="_top">-->
+    <input type="button" value="编辑" onclick="open_win()"/>
+
+    <br/>
+    <div class="preview">
+        <script type="text/babel" src="app.js"></script>
+    </div><br />
+
+    <input type="button"  value="提交"/>
+</div>
+
+</body>
+</html>
