@@ -18,19 +18,44 @@ const Item = React.createClass({
     },
     render(){
         if (this.props.text === 'text') {
-            return <div className="input">
-                <input type="input" className="panel"/>
-                <input type="button" onClick={this.handelDelete.bind(this)} value="-"/><br /><br />
+            return <div>
+                <input type="input" />
+                <input type="button" onClick={this.handelDelete.bind(this)} value="-"/>
             </div>
         } else {
-            return <div  className="input">
+            return <div>
                 <input type="date"/>
-                <input type="button" onClick={this.handelDelete.bind(this)} value="-"/><br /><br />
+                <input type="button" onClick={this.handelDelete.bind(this)} value="-"/>
             </div>
         }
 
     }
 });
+
+const Itemview = React.createClass({
+    render(){
+        if (this.props.text === 'text') {
+            return <div className="preview">
+                <input type="input" />
+            </div>
+        } else {
+            return <div className="preview">
+                <input type="date"/>
+            </div>
+        }
+
+    }
+
+});
+
+const Preview = React.createClass({
+    render(){
+        return <div>
+            <Itemview />
+        </div>
+    }
+});
+
 
 const App = React.createClass({
 
@@ -64,14 +89,13 @@ const App = React.createClass({
 
 
     render(){
-            return <div className="all">
-                <div className="look"></div>
-                <div float="left">
-                 <a href="./show.html" target="_blank">
-                <input type="button" id="look" onClick={this.onchange}  value="预览"/>
-                 </a>
-                </div>
-                <br /><br />
+        return <div className="all">
+            <div className="look"></div>
+            <div float="left">
+                <input type="button" id="look" onClick={this.onchange}  value={this.state.clicked ? "预览": "编辑"}/>
+            </div>
+            <br /><br />
+            <div className={this.state.clicked ? "" : "hidden"}>
                 <div className="Edit">
 
                     <form selectedValue={this.state.selectedValue}>
@@ -89,20 +113,16 @@ const App = React.createClass({
                     <Edit count={this.state.count} deleted={this.deleted.bind(this)} clicked={this.state.clicked}/>
                 </div>
             </div>
+            <div className={this.state.clicked ? "hidden" : ""}>
+                <Preview />
+                <input type="button" id="submit" value="提交"/>
+            </div>
 
-    }/*,
-    render2(){
-        return <div className="all">
-                <Edit count={this.state.count} deleted={this.deleted.bind(this)} clicked={this.state.clicked}/>
         </div>
 
-    }*/
+    }
 });
 
 ReactDOM.render(
     <App/>
     , document.getElementById('app'));
-/*
-ReactDOM.render2(
-    <App/>
-    , document.getElementById('preview'));*/
